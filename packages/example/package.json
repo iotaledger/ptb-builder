@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iota/dapp-kit": "^0.3.3",
+    "@iota/iota-sdk": "^0.4.1",
     "@mysten/dapp-kit": "^0.14.44",
     "@mysten/sui": "^1.18.0",
-    "@tanstack/react-query": "^5.62.11",
+    "@tanstack/react-query": "^5.64.2",
     "@zktx.io/ptb-builder": "^0.1.14",
     "notistack": "^3.0.1",
     "query-string": "^9.1.1",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Transaction } from '@mysten/sui/transactions';
+import { Transaction } from '@iota/iota-sdk/transactions';
 import Prism from 'prismjs';
 import { Resizable } from 're-resizable';
 

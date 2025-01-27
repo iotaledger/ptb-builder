@@ -1,8 +1,8 @@
 import {
-  SuiArgument,
-  SuiMoveNormalizedType,
-  SuiTransaction,
-} from '@mysten/sui/client';
+  IotaArgument,
+  IotaMoveNormalizedType,
+  IotaTransaction,
+} from '@iota/iota-sdk/client';
 
 import { PTB } from '../../../components';
 import { readPackageData } from '../../../provider';
@@ -13,7 +13,7 @@ import { PTBModuleData, TYPE_PARAMS } from '../../../ptbFlow/nodes/types';
 const InitX = -300;
 
 const getMakeMoveVectorInputType = (
-  arg: SuiArgument,
+  arg: IotaArgument,
   dictionary: Record<string, PTBNode>,
   modules: Record<string, PTBModuleData | undefined>,
 ): { source: string; sourceHandle: string } | undefined => {
@@ -100,7 +100,7 @@ const getMakeMoveVectorInputType = (
 
 const getEdge = (
   id: string,
-  arg: SuiArgument,
+  arg: IotaArgument,
   targetId: string,
   targetHandle: {
     name: string;
@@ -191,7 +191,7 @@ const getEdge = (
 
 export const getTransactionNode = (
   id: string,
-  tx: SuiTransaction,
+  tx: IotaTransaction,
   dictionary: Record<string, PTBNode>,
   modules: Record<string, PTBModuleData | undefined>,
 ): { nodes: PTBNode[]; edges: PTBEdge[] } | undefined => {
@@ -370,7 +370,7 @@ export const getTransactionNode = (
   if ('MoveCall' in tx) {
     let index = 0;
     const argumentTypes: PTBNode[] = [];
-    const parameters: SuiMoveNormalizedType[] =
+    const parameters: IotaMoveNormalizedType[] =
       modules[tx.MoveCall.package]?.modules[tx.MoveCall.module]
         ?.exposedFunctions[tx.MoveCall.function].parameters || [];
     tx.MoveCall.type_arguments?.forEach((arg) => {

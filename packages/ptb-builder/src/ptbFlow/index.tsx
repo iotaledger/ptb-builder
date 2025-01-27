@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Transaction } from '@mysten/sui/transactions';
+import { Transaction } from '@iota/iota-sdk/transactions';
 import {
   addEdge,
   Background,

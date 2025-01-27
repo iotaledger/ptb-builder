@@ -1,4 +1,4 @@
-import { SuiMoveNormalizedModule } from '@mysten/sui/client';
+import { IotaMoveNormalizedModule } from '@iota/iota-sdk/client';
 import { Connection, Edge, Node } from '@xyflow/react';
 
 export const NumericTypes = new Set([
@@ -96,7 +96,7 @@ export enum PTBNodeType {
   End = 'End',
 }
 
-interface SuiMoveNormalizedModuleWithNames extends SuiMoveNormalizedModule {
+interface SuiMoveNormalizedModuleWithNames extends IotaMoveNormalizedModule {
   _nameFunctions_: string[];
 }
 

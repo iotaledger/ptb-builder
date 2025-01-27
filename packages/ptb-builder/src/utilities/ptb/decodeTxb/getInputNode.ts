@@ -1,5 +1,5 @@
-import { SuiCallArg } from '@mysten/sui/client';
-import { fromHex } from '@mysten/sui/utils';
+import { IotaCallArg } from '@iota/iota-sdk/client';
+import { fromHEX } from '@iota/iota-sdk/utils';
 
 import { PTB } from '../../../components';
 import { PTBNode } from '../../../ptbFlow/nodes';
@@ -8,7 +8,7 @@ const InitX = -300;
 
 export const getInputNode = (
   id: string,
-  input: SuiCallArg,
+  input: IotaCallArg,
 ): PTBNode | undefined => {
   if (input.type === 'pure') {
     switch (input.valueType) {
@@ -60,7 +60,7 @@ export const getInputNode = (
             label: PTB.NumberVectorU8.Name,
             value:
               typeof input.value === 'string'
-                ? Array.from(fromHex(input.value))
+                ? Array.from(fromHEX(input.value))
                 : (input.value as string[]).map((v) => parseInt(v, 10)),
           },
         };

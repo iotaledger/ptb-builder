@@ -121,11 +121,11 @@ export const generateCode = (nodes: PTBNode[], edges: PTBEdge[]): string => {
 
     const lines: { line: string; comment: string }[] = [
       {
-        line: "// import { coinWithBalance, Transaction } from '@mysten/sui/transactions';",
+        line: "// import { coinWithBalance, Transaction } from '@iota/iota-sdk/transactions';",
         comment: '',
       },
       {
-        line: "// import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';",
+        line: "// import { Ed25519Keypair } from '@iota/iota-sdk/keypairs/ed25519';",
         comment: '',
       },
       { line: '', comment: '' },

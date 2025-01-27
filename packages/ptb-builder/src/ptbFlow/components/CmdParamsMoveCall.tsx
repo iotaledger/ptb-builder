@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SuiMoveAbilitySet, SuiMoveNormalizedType } from '@mysten/sui/client';
+import { IotaMoveAbilitySet, IotaMoveNormalizedType } from '@iota/iota-sdk/client';
 
 import { PtbHandle, PtbHandleArray, PtbHandleVector } from '../nodes/handles';
 import { PtbHandleNA } from '../nodes/handles/PtbHandleNA';
@@ -24,7 +24,7 @@ const YGap = 24;
 export const convertParams = (
   typeHandle: 'source' | 'target',
   prefix: string,
-  params: SuiMoveNormalizedType[],
+  params: IotaMoveNormalizedType[],
   typeArgs: string[],
 ): Handle[] => {
   if (params.length > 1 || typeHandle === 'target') {
@@ -37,7 +37,7 @@ export const convertParams = (
 };
 
 export const getTypeName = (
-  paramType: SuiMoveNormalizedType,
+  paramType: IotaMoveNormalizedType,
   typeArgs: string[],
 ): { placeholder: string; type?: TYPE } => {
   if (typeof paramType === 'string') {
@@ -115,7 +115,7 @@ export const getTypeName = (
 
 interface CmdParamsMoveCallProps {
   typeHandle: 'source' | 'target';
-  types: SuiMoveAbilitySet[];
+  types: IotaMoveAbilitySet[];
   params: Handle[];
 }
 

@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 
-import { SuiMoveNormalizedModules } from '@mysten/sui/client';
+import { IotaMoveNormalizedModules } from '@iota/iota-sdk/client';
 import { ColorModeClass } from '@xyflow/react';
 
 import { EnqueueToast, setToast } from './toastManager';
@@ -34,11 +34,11 @@ export interface IState {
   network: NETWORK;
   wallet?: string;
   fetchPackageData?: (packageId: string) => Promise<PTBModuleData | undefined>;
-  exportPackageData?: () => Record<string, SuiMoveNormalizedModules>;
-  importPackageData?: (data: Record<string, SuiMoveNormalizedModules>) => void;
+  exportPackageData?: () => Record<string, IotaMoveNormalizedModules>;
+  importPackageData?: (data: Record<string, IotaMoveNormalizedModules>) => void;
 }
 
-let packageDataCache: Record<string, SuiMoveNormalizedModules> = {};
+let packageDataCache: Record<string, IotaMoveNormalizedModules> = {};
 
 const StateContext = createContext<IState | undefined>(undefined);
 const StateUpdateContext = createContext<
@@ -92,13 +92,13 @@ export const StateProvider = ({
 
   const exportPackageData = useCallback((): Record<
     string,
-    SuiMoveNormalizedModules
+    IotaMoveNormalizedModules
   > => {
     return packageDataCache;
   }, []);
 
   const importPackageData = useCallback(
-    (data: Record<string, SuiMoveNormalizedModules>) => {
+    (data: Record<string, IotaMoveNormalizedModules>) => {
       packageDataCache = data;
     },
     [],

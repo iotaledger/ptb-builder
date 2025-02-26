@@ -1,4 +1,4 @@
-import { SuiMoveNormalizedModules } from '@mysten/sui/dist/cjs/client';
+import { IotaMoveNormalizedModules } from '@iota/iota-sdk/dist/cjs/client';
 
 import { PTBEdge, PTBNode } from '../ptbFlow/nodes';
 
@@ -20,5 +20,5 @@ export interface PTB_SCHEME {
       zoom: number;
     };
   };
-  modules: Record<string, SuiMoveNormalizedModules>;
+  modules: Record<string, IotaMoveNormalizedModules>;
 }

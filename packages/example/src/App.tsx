@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
-import { getFullnodeUrl } from '@mysten/sui/client';
+import { IotaClientProvider, WalletProvider } from '@iota/dapp-kit';
+import { getFullnodeUrl } from '@iota/iota-sdk/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { NETWORK } from './network';
@@ -29,7 +29,7 @@ function App() {
     'testnet' | 'mainnet' | 'devnet'
   >(NETWORK);
   return (
-    <SuiClientProvider
+    <IotaClientProvider
       networks={{
         mainnet: { url: getFullnodeUrl('mainnet') },
         testnet: { url: getFullnodeUrl('testnet') },
@@ -43,7 +43,7 @@ function App() {
       <WalletProvider autoConnect>
         <RouterProvider router={router} />;
       </WalletProvider>
-    </SuiClientProvider>
+    </IotaClientProvider>
   );
 }
 

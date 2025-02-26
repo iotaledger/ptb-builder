@@ -4,9 +4,9 @@ import {
   ConnectButton,
   useCurrentAccount,
   useSignAndExecuteTransaction,
-  useSuiClientContext,
-} from '@mysten/dapp-kit';
-import { Transaction } from '@mysten/sui/transactions';
+  useIotaClientContext,
+} from '@iota/dapp-kit';
+import { Transaction } from '@iota/iota-sdk/transactions';
 import { PTB_SCHEME, PTBBuilder } from '@zktx.io/ptb-builder';
 import { enqueueSnackbar } from 'notistack';
 
@@ -14,7 +14,7 @@ import { DragAndDrop } from '../components/DragAndDrop';
 import { NETWORK } from '../network';
 
 export const Editor = () => {
-  const ctx = useSuiClientContext();
+  const ctx = useIotaClientContext();
   const account = useCurrentAccount();
   const [network, setNetwork] = React.useState<
     'mainnet' | 'testnet' | 'devnet'

@@ -1,18 +1,18 @@
 import {
   getFullnodeUrl,
-  SuiClient,
-  SuiMoveNormalizedFunction,
-  SuiMoveNormalizedModule,
-  SuiMoveNormalizedModules,
-  SuiMoveNormalizedType,
-} from '@mysten/sui/client';
+  IotaClient,
+  IotaMoveNormalizedFunction,
+  IotaMoveNormalizedModule,
+  IotaMoveNormalizedModules,
+  IotaMoveNormalizedType,
+} from '@iota/iota-sdk/client';
 
 import { enqueueToast, NETWORK } from '../provider';
 import { PTBModuleData } from '../ptbFlow/nodes/types';
 
 const deleteTxContext = (
-  types: SuiMoveNormalizedType[],
-): SuiMoveNormalizedType[] => {
+  types: IotaMoveNormalizedType[],
+): IotaMoveNormalizedType[] => {
   return types.filter((type) => {
     if (typeof type === 'object') {
       const struct =
@@ -31,13 +31,13 @@ const deleteTxContext = (
 };
 
 export const toPTBModuleData = (
-  data: SuiMoveNormalizedModules,
+  data: IotaMoveNormalizedModules,
 ): PTBModuleData => {
   const processedModules: PTBModuleData = Object.entries(data).reduce(
-    (acc, [moduleName, moduleData]: [string, SuiMoveNormalizedModule]) => {
+    (acc, [moduleName, moduleData]: [string, IotaMoveNormalizedModule]) => {
       const functionNames = Object.keys(moduleData.exposedFunctions);
       const functions = functionNames.reduce<
-        Record<string, SuiMoveNormalizedFunction>
+        Record<string, IotaMoveNormalizedFunction>
       >((funcAcc, name) => {
         funcAcc[name] = {
           ...moduleData.exposedFunctions[name],
@@ -66,12 +66,12 @@ export const toPTBModuleData = (
 export const getPackageData = async (
   network: NETWORK,
   packageId: string,
-): Promise<SuiMoveNormalizedModules | undefined> => {
+): Promise<IotaMoveNormalizedModules | undefined> => {
   try {
-    const client = new SuiClient({
+    const client = new IotaClient({
       url: getFullnodeUrl(network),
     });
-    const modules: SuiMoveNormalizedModules =
+    const modules: IotaMoveNormalizedModules =
       await client.getNormalizedMoveModulesByPackage({
         package: packageId,
       });

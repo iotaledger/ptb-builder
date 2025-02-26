@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { SuiMoveAbilitySet } from '@mysten/sui/client';
+import { IotaMoveAbilitySet } from '@iota/iota-sdk/client';
 import { useReactFlow, useUpdateNodeInternals } from '@xyflow/react';
 
 import { PTBNodeProp } from '..';
@@ -30,7 +30,7 @@ export const MoveCall = ({ id, data }: PTBNodeProp) => {
   const [packageId, setPackageId] = useState<string>('');
   const [selectedModule, setSelectedModule] = useState<string>('');
   const [selectedFunction, setSelectedFunction] = useState<string>('');
-  const [selectedAbility, setSelectedAbility] = useState<SuiMoveAbilitySet[]>(
+  const [selectedAbility, setSelectedAbility] = useState<IotaMoveAbilitySet[]>(
     [],
   );
   const [selectedInputs, setSelectedInputs] = useState<Handle[]>([]);

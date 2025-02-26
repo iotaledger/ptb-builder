@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Transaction } from '@mysten/sui/transactions';
+import { Transaction } from '@iota/iota-sdk/transactions';
 import { ReactFlowProvider } from '@xyflow/react';
 
 import { EnqueueToast, NETWORK, StateProvider } from './provider';

@@ -1,9 +1,9 @@
 import {
   ExecutionStatus,
   getFullnodeUrl,
-  SuiClient,
+  IotaClient,
   TransactionBlockData,
-} from '@mysten/sui/client';
+} from '@iota/iota-sdk/client';
 
 import { NETWORK } from '../../../provider';
 
@@ -15,7 +15,7 @@ export const getBlockData = async (
   data: TransactionBlockData;
 }> => {
   try {
-    const client = new SuiClient({
+    const client = new IotaClient({
       url: getFullnodeUrl(network),
     });
     const res = await client.getTransactionBlock({

@@ -4,7 +4,7 @@ import {
   TransactionArgument,
   TransactionObjectArgument,
   TransactionResult,
-} from '@mysten/sui/transactions';
+} from '@iota/iota-sdk/transactions';
 
 import { generateFlow } from './generateFlow';
 import { readPackageData } from '../../provider';
@@ -308,17 +308,17 @@ export const generateTxb = async (
         case PTBNodeType.ObjectSystem:
           dictionary[key] = tx.object.system();
           break;
-        case PTBNodeType.ObjectOption:
+        /*case PTBNodeType.ObjectOption:
           {
             const temp = inputs[key].data.value;
             if (temp && Array.isArray(temp)) {
-              dictionary[key] = tx.object.option({
+              dictionary[key] = tx.object.random({
                 type: temp[0] as string,
                 value: temp[1] as string,
               });
             }
           }
-          break;
+          break;*/
         case PTBNodeType.CoinWithBalance:
           {
             const temp = inputs[key].data.value;

@@ -11,7 +11,7 @@
   },
   "author": "daoauth",
   "license": "ISC",
-  "description": "Sui programmable transaction blocks builder",
+  "description": "IOTA programmable transaction blocks builder",
   "workspaces": [
     "packages/ptb-builder",
     "packages/example"

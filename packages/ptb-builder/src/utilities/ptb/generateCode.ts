@@ -134,7 +134,7 @@ export const generateCode = (nodes: PTBNode[], edges: PTBEdge[]): string => {
         comment: '',
       },
       {
-        line: 'const myAddress = wallet.getPublicKey().toSuiAddress();',
+        line: 'const myAddress = wallet.getPublicKey().toIotaAddress();',
         comment: '',
       },
       { line: 'const GAS_BUDGET = 0.5 * 500000000;', comment: '' },

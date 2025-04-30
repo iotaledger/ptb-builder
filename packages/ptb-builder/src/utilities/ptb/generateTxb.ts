@@ -264,7 +264,7 @@ export const generateTxb = async (
           );
           break;
         case PTBNodeType.String:
-        case PTBNodeType.String0x2suiSUI:
+        case PTBNodeType.String0x2iotaIota:
           dictionary[key] = value as string;
           break;
         case PTBNodeType.StringVector:

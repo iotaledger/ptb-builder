@@ -9,7 +9,7 @@ import { PtbHandle } from '../handles';
 import { FormStyle, InputStyle, LabelStyle, NodeStyles } from '../styles';
 import { updateNodeData } from './updateNodeData';
 
-export const SuiObject = ({ id, data }: PTBNodeProp) => {
+export const IotaString = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const { canEdit } = useStateContext();
   const [inputValue, setInputValue] = useState<string>(
@@ -45,12 +45,12 @@ export const SuiObject = ({ id, data }: PTBNodeProp) => {
   }, []);
 
   return (
-    <div className={NodeStyles.object}>
+    <div className={NodeStyles.string}>
       <div className={FormStyle}>
         <label className={LabelStyle}>{data.label}</label>
         <input
           type="text"
-          placeholder="Enter object id"
+          placeholder="Enter string"
           autoComplete="off"
           className={InputStyle}
           readOnly={!canEdit}
@@ -58,7 +58,7 @@ export const SuiObject = ({ id, data }: PTBNodeProp) => {
           onChange={handleChange}
         />
       </div>
-      <PtbHandle typeHandle="source" typeParams="object" name="inputs" />
+      <PtbHandle typeHandle="source" typeParams="string" name="inputs" />
     </div>
   );
 };

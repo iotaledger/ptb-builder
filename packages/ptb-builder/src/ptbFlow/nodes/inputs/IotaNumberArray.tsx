@@ -13,35 +13,31 @@ import {
   LabelStyle,
   NodeStyles,
 } from '../styles';
-import { updateNodeData } from './updateNodeData';
 
-export const SuiObjectArray = ({ id, data }: PTBNodeProp) => {
+export const IotaNumberArray = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,
   );
-  const [items, setItems] = useState<string[]>(
-    (data.value as string[]) || [''],
-  );
+  const [items, setItems] = useState<number[]>([0]);
 
-  // Debounced function for updating nodes
-  const { debouncedFunction: updateNodes } = useDebounce(
-    (updatedItems: string[]) => {
-      setNodes((nds) =>
-        updateNodeData({
-          nodes: nds,
-          nodeId: id,
-          updater: (data) => ({ ...data, value: updatedItems }),
-        }),
-      );
-    },
-    DEBOUNCE,
-  );
+  const { debouncedFunction: updateNodes } = useDebounce((updatedItems) => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: { ...node.data, value: updatedItems },
+          };
+        }
+        return node;
+      }),
+    );
+  }, DEBOUNCE);
 
   const addItem = () => {
-    const updatedItems = [...items, ''];
+    const updatedItems = [...items, 0];
     setItems(updatedItems);
-    data.value = updatedItems;
     updateNodes(updatedItems);
   };
 
@@ -49,26 +45,24 @@ export const SuiObjectArray = ({ id, data }: PTBNodeProp) => {
     if (items.length > 1) {
       const updatedItems = items.filter((_, i) => i !== index);
       setItems(updatedItems);
-      data.value = updatedItems;
       updateNodes(updatedItems);
     }
   };
 
-  const updateItem = (index: number, value: string) => {
+  const updateItem = (index: number, value: number) => {
     const updatedItems = items.map((item, i) => (i === index ? value : item));
     setItems(updatedItems);
-    data.value = updatedItems;
     updateNodes(updatedItems);
   };
 
   useEffect(() => {
-    setItems((data.value as string[]) || ['']);
+    setItems((data.value as number[]) || [0]);
     setNodes((nds) =>
       nds.map((node) => {
         if (node.id === id) {
           return {
             ...node,
-            data: { ...node.data, value: (data.value as string[]) || [''] },
+            data: { ...node.data, value: (data.value as number[]) || [0] },
           };
         }
         return node;
@@ -78,7 +72,7 @@ export const SuiObjectArray = ({ id, data }: PTBNodeProp) => {
   }, []);
 
   return (
-    <div className={NodeStyles.object}>
+    <div className={NodeStyles.number}>
       <div className={FormStyle}>
         <div className={FormTitleStyle}>
           <label className={LabelStyle}>{data.label}</label>
@@ -101,19 +95,20 @@ export const SuiObjectArray = ({ id, data }: PTBNodeProp) => {
         </div>
         <ArrayInputs
           id={id}
+          isNumber
           isShow={isShow}
           items={items}
-          placeholder="Enter object id"
+          placeholder="Enter number"
           addItem={addItem}
           removeItem={removeItem}
           updateItem={updateItem}
           style={{
-            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.object.text} ${ButtonStyles.object.hoverBackground}`,
-            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.object.text} ${ButtonStyles.object.hoverBackground}`,
+            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
+            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
           }}
         />
       </div>
-      <PtbHandleArray typeHandle="source" typeParams="object[]" name="inputs" />
+      <PtbHandleArray typeHandle="source" typeParams="number[]" name="inputs" />
     </div>
   );
 };

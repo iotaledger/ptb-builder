@@ -9,11 +9,11 @@ import { PtbHandle } from '../handles';
 import { FormStyle, InputStyle, LabelStyle, NodeStyles } from '../styles';
 import { updateNodeData } from './updateNodeData';
 
-export const SuiAddress = ({ id, data }: PTBNodeProp) => {
+export const IotaBool = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const { canEdit } = useStateContext();
   const [inputValue, setInputValue] = useState<string>(
-    (data.value as string) || '',
+    data.value === 'true' ? 'true' : 'false',
   );
 
   const { debouncedFunction: updateNodes } = useDebounce((value: string) => {
@@ -26,39 +26,42 @@ export const SuiAddress = ({ id, data }: PTBNodeProp) => {
     );
   }, DEBOUNCE);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const handleChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = evt.target.value;
     setInputValue(value);
     updateNodes(value);
   };
 
   useEffect(() => {
-    setInputValue((data.value as string) || '');
+    setInputValue(data.value === 'true' ? 'true' : 'false');
     setNodes((nds) =>
       updateNodeData({
         nodes: nds,
         nodeId: id,
-        updater: (data) => ({ ...data, value: (data.value as string) || '' }),
+        updater: (data) => ({
+          ...data,
+          value: data.value === 'true' ? 'true' : 'false',
+        }),
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={NodeStyles.address}>
+    <div className={NodeStyles.bool}>
       <div className={FormStyle}>
         <label className={LabelStyle}>{data.label}</label>
-        <input
-          type="text"
-          placeholder="Enter address"
-          autoComplete="off"
+        <select
           className={InputStyle}
-          readOnly={!canEdit}
+          disabled={!canEdit}
           value={inputValue}
           onChange={handleChange}
-        />
+        >
+          <option value="false">false</option>
+          <option value="true">true</option>
+        </select>
       </div>
-      <PtbHandle typeHandle="source" typeParams="address" name="inputs" />
+      <PtbHandle typeHandle="source" typeParams="bool" name="inputs" />
     </div>
   );
 };

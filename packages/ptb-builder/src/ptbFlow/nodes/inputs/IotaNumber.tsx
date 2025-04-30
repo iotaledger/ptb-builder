@@ -9,14 +9,12 @@ import { PtbHandle } from '../handles';
 import { FormStyle, InputStyle, LabelStyle, NodeStyles } from '../styles';
 import { updateNodeData } from './updateNodeData';
 
-export const SuiBool = ({ id, data }: PTBNodeProp) => {
+export const IotaNumber = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const { canEdit } = useStateContext();
-  const [inputValue, setInputValue] = useState<string>(
-    data.value === 'true' ? 'true' : 'false',
-  );
+  const [inputValue, setInputValue] = useState<number>(0);
 
-  const { debouncedFunction: updateNodes } = useDebounce((value: string) => {
+  const { debouncedFunction: updateNodes } = useDebounce((value) => {
     setNodes((nds) =>
       updateNodeData({
         nodes: nds,
@@ -26,42 +24,43 @@ export const SuiBool = ({ id, data }: PTBNodeProp) => {
     );
   }, DEBOUNCE);
 
-  const handleChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = evt.target.value;
-    setInputValue(value);
-    updateNodes(value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const numericValue = Number(value);
+    if (value === '' || (!Number.isNaN(numericValue) && numericValue >= 0)) {
+      setInputValue(numericValue);
+      updateNodes(numericValue);
+    }
   };
 
   useEffect(() => {
-    setInputValue(data.value === 'true' ? 'true' : 'false');
+    setInputValue((data.value as number) || 0);
     setNodes((nds) =>
       updateNodeData({
         nodes: nds,
         nodeId: id,
-        updater: (data) => ({
-          ...data,
-          value: data.value === 'true' ? 'true' : 'false',
-        }),
+        updater: (data) => ({ ...data, value: (data.value as number) || 0 }),
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={NodeStyles.bool}>
+    <div className={NodeStyles.number}>
       <div className={FormStyle}>
         <label className={LabelStyle}>{data.label}</label>
-        <select
+        <input
+          type="number"
+          placeholder="Enter number"
+          autoComplete="off"
           className={InputStyle}
-          disabled={!canEdit}
+          readOnly={!canEdit}
           value={inputValue}
+          min={0}
           onChange={handleChange}
-        >
-          <option value="false">false</option>
-          <option value="true">true</option>
-        </select>
+        />
       </div>
-      <PtbHandle typeHandle="source" typeParams="bool" name="inputs" />
+      <PtbHandle typeHandle="source" typeParams="number" name="inputs" />
     </div>
   );
 };

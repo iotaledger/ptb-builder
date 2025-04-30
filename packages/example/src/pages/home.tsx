@@ -10,7 +10,6 @@ export const Home = () => {
 
   return (
     <div className="container">
-      <img src="/logo-sui.svg" alt="sui" className="logo" />
       <h1 className="title">PTB Builder</h1>
       <ConnectButton />
       <p style={{ color: 'white' }}>{`${NETWORK.toUpperCase()}`}</p>

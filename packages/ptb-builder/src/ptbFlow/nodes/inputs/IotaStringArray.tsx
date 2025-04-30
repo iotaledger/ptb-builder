@@ -5,7 +5,7 @@ import { useReactFlow } from '@xyflow/react';
 import { PTBNodeProp } from '..';
 import { DEBOUNCE, useDebounce } from '../../../utilities';
 import { ArrayInputs } from '../../components';
-import { PtbHandleVector } from '../handles';
+import { PtbHandleArray } from '../handles';
 import {
   ButtonStyles,
   FormStyle,
@@ -13,31 +13,32 @@ import {
   LabelStyle,
   NodeStyles,
 } from '../styles';
-import { TYPE_VECTOR } from '../types';
+import { updateNodeData } from './updateNodeData';
 
-export const SuiNumberVector = ({ id, data }: PTBNodeProp) => {
+export const IotaStringArray = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,
   );
-  const [items, setItems] = useState<number[]>([0]);
+  const [items, setItems] = useState<string[]>(
+    (data.value as string[]) || [''],
+  );
 
-  const { debouncedFunction: updateNodes } = useDebounce((updatedItems) => {
-    setNodes((nds) =>
-      nds.map((node) => {
-        if (node.id === id) {
-          return {
-            ...node,
-            data: { ...node.data, value: updatedItems },
-          };
-        }
-        return node;
-      }),
-    );
-  }, DEBOUNCE);
+  const { debouncedFunction: updateNodes } = useDebounce(
+    (updatedItems: string[]) => {
+      setNodes((nds) =>
+        updateNodeData({
+          nodes: nds,
+          nodeId: id,
+          updater: (data) => ({ ...data, value: updatedItems }),
+        }),
+      );
+    },
+    DEBOUNCE,
+  );
 
   const addItem = () => {
-    const updatedItems = [...items, 0];
+    const updatedItems = [...items, ''];
     setItems(updatedItems);
     updateNodes(updatedItems);
   };
@@ -50,20 +51,20 @@ export const SuiNumberVector = ({ id, data }: PTBNodeProp) => {
     }
   };
 
-  const updateItem = (index: number, value: number) => {
+  const updateItem = (index: number, value: string) => {
     const updatedItems = items.map((item, i) => (i === index ? value : item));
     setItems(updatedItems);
     updateNodes(updatedItems);
   };
 
   useEffect(() => {
-    setItems((data.value as number[]) || [0]);
+    setItems((data.value as string[]) || ['']);
     setNodes((nds) =>
       nds.map((node) => {
         if (node.id === id) {
           return {
             ...node,
-            data: { ...node.data, value: (data.value as number[]) || [0] },
+            data: { ...node.data, value: (data.value as string[]) || [''] },
           };
         }
         return node;
@@ -73,7 +74,7 @@ export const SuiNumberVector = ({ id, data }: PTBNodeProp) => {
   }, []);
 
   return (
-    <div className={NodeStyles.number}>
+    <div className={NodeStyles.string}>
       <div className={FormStyle}>
         <div className={FormTitleStyle}>
           <label className={LabelStyle}>{data.label}</label>
@@ -96,24 +97,19 @@ export const SuiNumberVector = ({ id, data }: PTBNodeProp) => {
         </div>
         <ArrayInputs
           id={id}
-          isNumber
           isShow={isShow}
           items={items}
-          placeholder="Enter number"
+          placeholder="Enter string"
           addItem={addItem}
           removeItem={removeItem}
           updateItem={updateItem}
           style={{
-            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
-            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
+            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.string.text} ${ButtonStyles.string.hoverBackground}`,
+            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.string.text} ${ButtonStyles.string.hoverBackground}`,
           }}
         />
       </div>
-      <PtbHandleVector
-        typeHandle="source"
-        typeParams={data.label as TYPE_VECTOR}
-        name="inputs"
-      />
+      <PtbHandleArray typeHandle="source" typeParams="string[]" name="inputs" />
     </div>
   );
 };

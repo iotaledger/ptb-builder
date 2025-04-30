@@ -1,51 +1,51 @@
-import { SuiAddress } from './SuiAddress';
-import { SuiAddressArray } from './SuiAddressArray';
-import { SuiAddressVector } from './SuiAddressVector';
-import { SuiAddressWallet } from './SuiAddressWallet';
-import { SuiBool } from './SuiBool';
-import { SuiBoolArray } from './SuiBoolArray';
-import { SuiBoolVector } from './SuiBoolVector';
-import { SuiNumber } from './SuiNumber';
-import { SuiNumberArray } from './SuiNumberArray';
-import { SuiNumberVector } from './SuiNumberVector';
-import { SuiObject } from './SuiObject';
-import { SuiObjectArray } from './SuiObjectArray';
-import { SuiObjectClock } from './SuiObjectClock';
-import { SuiObjectCoinWithBalance } from './SuiObjectCoinWithBalance';
-import { SuiObjectDenyList } from './SuiObjectDenyList';
-import { SuiObjectGas } from './SuiObjectGas';
-import { SuiObjectOption } from './SuiObjectOption';
-import { SuiObjectRandom } from './SuiObjectRandom';
-import { SuiObjectSystem } from './SuiObjectSystem';
-import { SuiObjectVector } from './SuiObjectVector';
-import { SuiString } from './SuiString';
-import { SuiString0x2suiSUI } from './SuiString0x2suiSUI';
-import { SuiStringArray } from './SuiStringArray';
-import { SuiStringVector } from './SuiStringVector';
+import { IotaAddress } from './IotaAddress';
+import { IotaAddressArray } from './IotaAddressArray';
+import { IotaAddressVector } from './IotaAddressVector';
+import { IotaAddressWallet } from './IotaAddressWallet';
+import { IotaBool } from './IotaBool';
+import { IotaBoolArray } from './IotaBoolArray';
+import { IotaBoolVector } from './IotaBoolVector';
+import { IotaNumber } from './IotaNumber';
+import { IotaNumberArray } from './IotaNumberArray';
+import { IotaNumberVector } from './IotaNumberVector';
+import { IotaObject } from './IotaObject';
+import { IotaObjectArray } from './IotaObjectArray';
+import { IotaObjectClock } from './IotaObjectClock';
+import { IotaObjectCoinWithBalance } from './IotaObjectCoinWithBalance';
+import { IotaObjectDenyList } from './IotaObjectDenyList';
+import { IotaObjectGas } from './IotaObjectGas';
+import { IotaObjectOption } from './IotaObjectOption';
+import { IotaObjectRandom } from './IotaObjectRandom';
+import { IotaObjectSystem } from './IotaObjectSystem';
+import { IotaObjectVector } from './IotaObjectVector';
+import { IotaString } from './IotaString';
+import { IotaString0x2iotaIota } from './IotaString0x2iotaIota';
+import { IotaStringArray } from './IotaStringArray';
+import { IotaStringVector } from './IotaStringVector';
 
 export default {
-  SuiAddress,
-  SuiAddressArray,
-  SuiAddressVector,
-  SuiAddressWallet,
-  SuiString,
-  SuiStringArray,
-  SuiStringVector,
-  SuiString0x2suiSUI,
-  SuiBool,
-  SuiBoolArray,
-  SuiBoolVector,
-  SuiNumber,
-  SuiNumberArray,
-  SuiNumberVector,
-  SuiObject,
-  SuiObjectArray,
-  SuiObjectVector,
-  SuiObjectGas,
-  SuiObjectClock,
-  SuiObjectDenyList,
-  SuiObjectOption,
-  SuiObjectRandom,
-  SuiObjectSystem,
-  SuiObjectCoinWithBalance,
+  IotaAddress,
+  IotaAddressArray,
+  IotaAddressVector,
+  IotaAddressWallet,
+  IotaString,
+  IotaStringArray,
+  IotaStringVector,
+  IotaString0x2iotaIota,
+  IotaBool,
+  IotaBoolArray,
+  IotaBoolVector,
+  IotaNumber,
+  IotaNumberArray,
+  IotaNumberVector,
+  IotaObject,
+  IotaObjectArray,
+  IotaObjectVector,
+  IotaObjectGas,
+  IotaObjectClock,
+  IotaObjectDenyList,
+  IotaObjectOption,
+  IotaObjectRandom,
+  IotaObjectSystem,
+  IotaObjectCoinWithBalance,
 };

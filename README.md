@@ -1,16 +1,8 @@
 # Programmable Transaction Blocks Builder (PTB Builder)
 
-**PTB Builder** is a visual development tool for **Programmable Transaction Blocks (PTBs)**, a core technology of the Sui blockchain. Designed to create a powerful synergy with Sui’s PTB capabilities, this tool allows both developers and non-developers to easily construct and manage complex transactions, maximizing the potential of this advanced technology and making it more accessible to a broader audience.
+**PTB Builder** is a visual development tool for **Programmable Transaction Blocks (PTBs)**, a core technology of the Iota blockchain. Designed to create a powerful synergy with Iota’s PTB capabilities, this tool allows both developers and non-developers to easily construct and manage complex transactions, maximizing the potential of this advanced technology and making it more accessible to a broader audience.
 
-![ptb-builder-editor.png](https://docs.zktx.io/images/ptb-builder-editor.png)
-
-https://github.com/user-attachments/assets/0e7a3d47-451a-4cea-a36d-9df23d931cf2
-
-## Demo
-
-- [https://ptb-builder.walrus.site/](https://ptb-builder.walrus.site/)
-
-## Key Use Cases
+## Overview Key Use Cases
 
 1. Transaction Construction and Pre-Testing:
    - Intuitive UI: Visually construct transactions through a drag-and-drop graphical interface.
@@ -41,13 +33,24 @@ https://github.com/user-attachments/assets/0e7a3d47-451a-4cea-a36d-9df23d931cf2
 - Cost Reduction: Decrease errors during development, reducing costs associated with debugging and fixing.
 - Strengthened Collaboration: Promote team collaboration through graph sharing and joint work.
 
-## Roadmap
+## Prerequisites
+- Node.js (v18 or later)
+- npm
 
-1. Current Status:
-   - Providing PoC Version: Offering an initial version equipped with basic transaction construction and execution features.
-   - Collecting User Feedback: Improving the tool by incorporating users’ opinions.
-1. Future Plans:
-   - VS Code Integration: Plan to integrate PTB Builder into Sui’s VS Code development tool, Sui Extension, allowing developers to create and test transactions in a familiar environment.
-   - Adding Advanced Features:
-     - Version Control: Enable tracking and restoring changes through version control of transaction graphs.
-     - Integrated Testing Environment: Provide a testing environment similar to the actual network to verify transaction behavior more accurately.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/iotaledger/ptb-builder
+   cd ptb-builder
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to `http://localhost:3000` to access the PTB Builder interface.
+
+

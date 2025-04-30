@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useReactFlow } from '@xyflow/react';
 
 import { PTBNodeProp } from '..';
-import { IconDice } from '../../../icons';
+import { IconGas } from '../../../icons';
 import { PtbHandle } from '../handles';
 import { FormStyle, LabelStyle, NodeStyles } from '../styles';
 
-export const SuiObjectRandom = ({ id, data }: PTBNodeProp) => {
+export const IotaObjectGas = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   useEffect(() => {
     setNodes((nds) =>
@@ -15,7 +15,7 @@ export const SuiObjectRandom = ({ id, data }: PTBNodeProp) => {
         if (node.id === id) {
           return {
             ...node,
-            data: { ...node.data, value: 'tx.object.random()' },
+            data: { ...node.data, value: 'tx.gas' },
           };
         }
         return node;
@@ -26,7 +26,7 @@ export const SuiObjectRandom = ({ id, data }: PTBNodeProp) => {
     <div className={NodeStyles.object}>
       <div className={FormStyle}>
         <label className={`flex items-center gap-2 ${LabelStyle}`}>
-          <IconDice />
+          <IconGas />
           {data.label}
         </label>
       </div>

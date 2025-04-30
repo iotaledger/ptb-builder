@@ -31,7 +31,7 @@ export const Editor = () => {
       signAndExecuteTransaction(
         {
           transaction,
-          chain: `sui:${network}`,
+          chain: `iota:${network}`,
         },
         {
           onSuccess: (result) => {

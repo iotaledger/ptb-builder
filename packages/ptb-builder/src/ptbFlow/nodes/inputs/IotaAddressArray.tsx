@@ -5,7 +5,7 @@ import { useReactFlow } from '@xyflow/react';
 import { PTBNodeProp } from '..';
 import { DEBOUNCE, useDebounce } from '../../../utilities';
 import { ArrayInputs } from '../../components';
-import { PtbHandleVector } from '../handles';
+import { PtbHandleArray } from '../handles';
 import {
   ButtonStyles,
   FormStyle,
@@ -15,30 +15,27 @@ import {
 } from '../styles';
 import { updateNodeData } from './updateNodeData';
 
-export const SuiBoolVector = ({ id, data }: PTBNodeProp) => {
+export const IotaAddressArray = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,
   );
   const [items, setItems] = useState<string[]>(
-    (data.value as string[]) || ['true'],
+    (data.value as string[]) || [''],
   );
 
-  const { debouncedFunction: updateNodes } = useDebounce(
-    (updatedItems: string[]) => {
-      setNodes((nds) =>
-        updateNodeData({
-          nodes: nds,
-          nodeId: id,
-          updater: (data) => ({ ...data, value: updatedItems }),
-        }),
-      );
-    },
-    DEBOUNCE,
-  );
+  const { debouncedFunction: updateNodes } = useDebounce((updatedItems) => {
+    setNodes((nds) =>
+      updateNodeData({
+        nodes: nds,
+        nodeId: id,
+        updater: (data) => ({ ...data, value: updatedItems }),
+      }),
+    );
+  }, DEBOUNCE);
 
   const addItem = () => {
-    const updatedItems = [...items, 'false'];
+    const updatedItems = [...items, ''];
     setItems(updatedItems);
     updateNodes(updatedItems);
   };
@@ -58,14 +55,14 @@ export const SuiBoolVector = ({ id, data }: PTBNodeProp) => {
   };
 
   useEffect(() => {
-    setItems((data.value as string[]) || ['true']);
+    setItems((data.value as string[]) || ['']);
     setNodes((nds) =>
       updateNodeData({
         nodes: nds,
         nodeId: id,
         updater: (data) => ({
           ...data,
-          value: (data.value as string[]) || ['true'],
+          value: (data.value as string[]) || [''],
         }),
       }),
     );
@@ -73,7 +70,7 @@ export const SuiBoolVector = ({ id, data }: PTBNodeProp) => {
   }, []);
 
   return (
-    <div className={NodeStyles.bool}>
+    <div className={NodeStyles.address}>
       <div className={FormStyle}>
         <div className={FormTitleStyle}>
           <label className={LabelStyle}>{data.label}</label>
@@ -96,22 +93,21 @@ export const SuiBoolVector = ({ id, data }: PTBNodeProp) => {
         </div>
         <ArrayInputs
           id={id}
-          isBoolean
           isShow={isShow}
           items={items}
-          placeholder="Enter boolean"
+          placeholder="Enter address"
           addItem={addItem}
           removeItem={removeItem}
           updateItem={updateItem}
           style={{
-            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.bool.text} ${ButtonStyles.bool.hoverBackground}`,
-            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.bool.text} ${ButtonStyles.bool.hoverBackground}`,
+            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
+            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
           }}
         />
       </div>
-      <PtbHandleVector
+      <PtbHandleArray
         typeHandle="source"
-        typeParams="vector<bool>"
+        typeParams="address[]"
         name="inputs"
       />
     </div>

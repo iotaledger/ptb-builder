@@ -16,7 +16,7 @@ import {
 import { updateNodeData } from './updateNodeData';
 import { TYPE_VECTOR } from '../types';
 
-export const SuiStringVector = ({ id, data }: PTBNodeProp) => {
+export const IotaStringVector = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,

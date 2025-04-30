@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useReactFlow } from '@xyflow/react';
 
 import { PTBNodeProp } from '..';
-import { IconGas } from '../../../icons';
-import { PtbHandle } from '../handles';
+import { IconWallet } from '../../../icons';
+import { PtbHandle } from '../handles/PtbHandle';
 import { FormStyle, LabelStyle, NodeStyles } from '../styles';
 
-export const SuiObjectGas = ({ id, data }: PTBNodeProp) => {
+export const IotaAddressWallet = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   useEffect(() => {
     setNodes((nds) =>
@@ -15,7 +15,7 @@ export const SuiObjectGas = ({ id, data }: PTBNodeProp) => {
         if (node.id === id) {
           return {
             ...node,
-            data: { ...node.data, value: 'tx.gas' },
+            data: { ...node.data, value: 'myAddress' },
           };
         }
         return node;
@@ -23,14 +23,14 @@ export const SuiObjectGas = ({ id, data }: PTBNodeProp) => {
     );
   }, [id, setNodes]);
   return (
-    <div className={NodeStyles.object}>
+    <div className={NodeStyles.address}>
       <div className={FormStyle}>
         <label className={`flex items-center gap-2 ${LabelStyle}`}>
-          <IconGas />
+          <IconWallet />
           {data.label}
         </label>
       </div>
-      <PtbHandle typeHandle="source" typeParams="object" name="inputs" />
+      <PtbHandle typeHandle="source" typeParams="address" name="inputs" />
     </div>
   );
 };

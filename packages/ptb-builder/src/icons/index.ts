@@ -1,4 +1,4 @@
-export { IconSui } from './IconSui';
+export { IconIota } from './IconIota';
 export { IconCircle } from './IconCircle';
 export { IconSquare } from './IconSquare';
 export { IconTriangle } from './IconTriangle';

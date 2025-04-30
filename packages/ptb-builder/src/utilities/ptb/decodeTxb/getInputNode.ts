@@ -165,15 +165,15 @@ export const getInputNode = (
         };
       case 'string':
         switch (input.value) {
-          case '0x2::sui::SUI':
-          case '0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI':
+          case '0x2::iota::Iota':
+          case '0x0000000000000000000000000000000000000000000000000000000000000002::iota::Iota':
             return {
               id,
               position: { x: InitX, y: 0 },
-              type: PTB.String0x2suiSUI.Type,
+              type: PTB.String0x2iotaIota.Type,
               deletable: false,
               data: {
-                label: PTB.String0x2suiSUI.Name,
+                label: PTB.String0x2iotaIota.Name,
               },
             };
           default:

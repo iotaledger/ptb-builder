@@ -92,9 +92,9 @@ export const PTB = {
     Type: PTBNodeType.StringVector,
     Name: 'vector<string>',
   },
-  String0x2suiSUI: {
-    Type: PTBNodeType.String0x2suiSUI,
-    Name: '0x2::sui::SUI',
+  String0x2iotaIota: {
+    Type: PTBNodeType.String0x2iotaIota,
+    Name: '0x2::iota::Iota',
   },
 
   NumberArray: {
@@ -215,8 +215,8 @@ export const Menu: {
       name: 'String',
       submenu: [
         {
-          name: PTB.String0x2suiSUI.Name,
-          type: PTB.String0x2suiSUI.Type,
+          name: PTB.String0x2iotaIota.Name,
+          type: PTB.String0x2iotaIota.Type,
           icon: <IconCircle color="bg-green-500" />,
         },
         {

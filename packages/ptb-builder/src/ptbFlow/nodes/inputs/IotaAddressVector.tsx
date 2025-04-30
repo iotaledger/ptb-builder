@@ -5,7 +5,7 @@ import { useReactFlow } from '@xyflow/react';
 import { PTBNodeProp } from '..';
 import { DEBOUNCE, useDebounce } from '../../../utilities';
 import { ArrayInputs } from '../../components';
-import { PtbHandleArray } from '../handles';
+import { PtbHandleVector } from '../handles';
 import {
   ButtonStyles,
   FormStyle,
@@ -15,7 +15,7 @@ import {
 } from '../styles';
 import { updateNodeData } from './updateNodeData';
 
-export const SuiStringArray = ({ id, data }: PTBNodeProp) => {
+export const IotaAddressVector = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,
@@ -24,18 +24,15 @@ export const SuiStringArray = ({ id, data }: PTBNodeProp) => {
     (data.value as string[]) || [''],
   );
 
-  const { debouncedFunction: updateNodes } = useDebounce(
-    (updatedItems: string[]) => {
-      setNodes((nds) =>
-        updateNodeData({
-          nodes: nds,
-          nodeId: id,
-          updater: (data) => ({ ...data, value: updatedItems }),
-        }),
-      );
-    },
-    DEBOUNCE,
-  );
+  const { debouncedFunction: updateNodes } = useDebounce((updatedItems) => {
+    setNodes((nds) =>
+      updateNodeData({
+        nodes: nds,
+        nodeId: id,
+        updater: (data) => ({ ...data, value: updatedItems }),
+      }),
+    );
+  }, DEBOUNCE);
 
   const addItem = () => {
     const updatedItems = [...items, ''];
@@ -60,21 +57,20 @@ export const SuiStringArray = ({ id, data }: PTBNodeProp) => {
   useEffect(() => {
     setItems((data.value as string[]) || ['']);
     setNodes((nds) =>
-      nds.map((node) => {
-        if (node.id === id) {
-          return {
-            ...node,
-            data: { ...node.data, value: (data.value as string[]) || [''] },
-          };
-        }
-        return node;
+      updateNodeData({
+        nodes: nds,
+        nodeId: id,
+        updater: (data) => ({
+          ...data,
+          value: (data.value as string[]) || [''],
+        }),
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={NodeStyles.string}>
+    <div className={NodeStyles.address}>
       <div className={FormStyle}>
         <div className={FormTitleStyle}>
           <label className={LabelStyle}>{data.label}</label>
@@ -99,17 +95,21 @@ export const SuiStringArray = ({ id, data }: PTBNodeProp) => {
           id={id}
           isShow={isShow}
           items={items}
-          placeholder="Enter string"
+          placeholder="Enter address"
           addItem={addItem}
           removeItem={removeItem}
           updateItem={updateItem}
           style={{
-            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.string.text} ${ButtonStyles.string.hoverBackground}`,
-            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.string.text} ${ButtonStyles.string.hoverBackground}`,
+            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
+            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
           }}
         />
       </div>
-      <PtbHandleArray typeHandle="source" typeParams="string[]" name="inputs" />
+      <PtbHandleVector
+        typeHandle="source"
+        typeParams="vector<address>"
+        name="inputs"
+      />
     </div>
   );
 };

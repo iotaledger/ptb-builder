@@ -13,29 +13,31 @@ import {
   LabelStyle,
   NodeStyles,
 } from '../styles';
-import { updateNodeData } from './updateNodeData';
+import { TYPE_VECTOR } from '../types';
 
-export const SuiAddressVector = ({ id, data }: PTBNodeProp) => {
+export const IotaNumberVector = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   const [isShow, setIsShow] = useState<boolean>(
     data && data.value ? (data.value as string[]).length < 4 : true,
   );
-  const [items, setItems] = useState<string[]>(
-    (data.value as string[]) || [''],
-  );
+  const [items, setItems] = useState<number[]>([0]);
 
   const { debouncedFunction: updateNodes } = useDebounce((updatedItems) => {
     setNodes((nds) =>
-      updateNodeData({
-        nodes: nds,
-        nodeId: id,
-        updater: (data) => ({ ...data, value: updatedItems }),
+      nds.map((node) => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: { ...node.data, value: updatedItems },
+          };
+        }
+        return node;
       }),
     );
   }, DEBOUNCE);
 
   const addItem = () => {
-    const updatedItems = [...items, ''];
+    const updatedItems = [...items, 0];
     setItems(updatedItems);
     updateNodes(updatedItems);
   };
@@ -48,29 +50,30 @@ export const SuiAddressVector = ({ id, data }: PTBNodeProp) => {
     }
   };
 
-  const updateItem = (index: number, value: string) => {
+  const updateItem = (index: number, value: number) => {
     const updatedItems = items.map((item, i) => (i === index ? value : item));
     setItems(updatedItems);
     updateNodes(updatedItems);
   };
 
   useEffect(() => {
-    setItems((data.value as string[]) || ['']);
+    setItems((data.value as number[]) || [0]);
     setNodes((nds) =>
-      updateNodeData({
-        nodes: nds,
-        nodeId: id,
-        updater: (data) => ({
-          ...data,
-          value: (data.value as string[]) || [''],
-        }),
+      nds.map((node) => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: { ...node.data, value: (data.value as number[]) || [0] },
+          };
+        }
+        return node;
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={NodeStyles.address}>
+    <div className={NodeStyles.number}>
       <div className={FormStyle}>
         <div className={FormTitleStyle}>
           <label className={LabelStyle}>{data.label}</label>
@@ -93,21 +96,22 @@ export const SuiAddressVector = ({ id, data }: PTBNodeProp) => {
         </div>
         <ArrayInputs
           id={id}
+          isNumber
           isShow={isShow}
           items={items}
-          placeholder="Enter address"
+          placeholder="Enter number"
           addItem={addItem}
           removeItem={removeItem}
           updateItem={updateItem}
           style={{
-            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
-            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.address.text} ${ButtonStyles.address.hoverBackground}`,
+            deleteButton: `text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
+            addButton: `w-full py-1 text-center text-xs rounded-md ${ButtonStyles.number.text} ${ButtonStyles.number.hoverBackground}`,
           }}
         />
       </div>
       <PtbHandleVector
         typeHandle="source"
-        typeParams="vector<address>"
+        typeParams={data.label as TYPE_VECTOR}
         name="inputs"
       />
     </div>

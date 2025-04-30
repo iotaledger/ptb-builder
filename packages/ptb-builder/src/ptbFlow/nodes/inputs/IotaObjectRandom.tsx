@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useReactFlow } from '@xyflow/react';
 
 import { PTBNodeProp } from '..';
-import { IconClock } from '../../../icons';
+import { IconDice } from '../../../icons';
 import { PtbHandle } from '../handles';
 import { FormStyle, LabelStyle, NodeStyles } from '../styles';
 
-export const SuiObjectClock = ({ id, data }: PTBNodeProp) => {
+export const IotaObjectRandom = ({ id, data }: PTBNodeProp) => {
   const { setNodes } = useReactFlow();
   useEffect(() => {
     setNodes((nds) =>
@@ -15,7 +15,7 @@ export const SuiObjectClock = ({ id, data }: PTBNodeProp) => {
         if (node.id === id) {
           return {
             ...node,
-            data: { ...node.data, value: 'tx.object.clock()' },
+            data: { ...node.data, value: 'tx.object.random()' },
           };
         }
         return node;
@@ -26,7 +26,7 @@ export const SuiObjectClock = ({ id, data }: PTBNodeProp) => {
     <div className={NodeStyles.object}>
       <div className={FormStyle}>
         <label className={`flex items-center gap-2 ${LabelStyle}`}>
-          <IconClock />
+          <IconDice />
           {data.label}
         </label>
       </div>

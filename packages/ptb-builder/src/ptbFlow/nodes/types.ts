@@ -56,33 +56,33 @@ export type TYPE =
   | 'command';
 
 export enum PTBNodeType {
-  Address = 'SuiAddress',
-  AddressArray = 'SuiAddressArray',
-  AddressVector = 'SuiAddressVector',
-  AddressWallet = 'SuiAddressWallet',
+  Address = 'IotaAddress',
+  AddressArray = 'IotaAddressArray',
+  AddressVector = 'IotaAddressVector',
+  AddressWallet = 'IotaAddressWallet',
 
-  Bool = 'SuiBool',
-  BoolArray = 'SuiBoolArray',
-  BoolVector = 'SuiBoolVector',
+  Bool = 'IotaBool',
+  BoolArray = 'IotaBoolArray',
+  BoolVector = 'IotaBoolVector',
 
-  Number = 'SuiNumber',
-  NumberArray = 'SuiNumberArray',
-  NumberVector = 'SuiNumberVector',
+  Number = 'IotaNumber',
+  NumberArray = 'IotaNumberArray',
+  NumberVector = 'IotaNumberVector',
 
-  Object = 'SuiObject',
-  ObjectArray = 'SuiObjectArray',
-  ObjectVector = 'SuiObjectVector',
-  ObjectGas = 'SuiObjectGas',
-  ObjectClock = 'SuiObjectClock',
-  ObjectDenyList = 'SuiObjectDenyList',
-  ObjectOption = 'SuiObjectOption',
-  ObjectRandom = 'SuiObjectRandom',
-  ObjectSystem = 'SuiObjectSystem',
-  CoinWithBalance = 'SuiObjectCoinWithBalance',
-  String = 'SuiString',
-  StringArray = 'SuiStringArray',
-  StringVector = 'SuiStringVector',
-  String0x2suiSUI = 'SuiString0x2suiSUI',
+  Object = 'IotaObject',
+  ObjectArray = 'IotaObjectArray',
+  ObjectVector = 'IotaObjectVector',
+  ObjectGas = 'IotaObjectGas',
+  ObjectClock = 'IotaObjectClock',
+  ObjectDenyList = 'IotaObjectDenyList',
+  ObjectOption = 'IotaObjectOption',
+  ObjectRandom = 'IotaObjectRandom',
+  ObjectSystem = 'IotaObjectSystem',
+  CoinWithBalance = 'IotaObjectCoinWithBalance',
+  String = 'IotaString',
+  StringArray = 'IotaStringArray',
+  StringVector = 'IotaStringVector',
+  String0x2iotaIota = 'IotaString0x2iotaIota',
 
   MergeCoins = 'MergeCoins',
   SplitCoins = 'SplitCoins',
@@ -96,13 +96,13 @@ export enum PTBNodeType {
   End = 'End',
 }
 
-interface SuiMoveNormalizedModuleWithNames extends IotaMoveNormalizedModule {
+interface IotaMoveNormalizedModuleWithNames extends IotaMoveNormalizedModule {
   _nameFunctions_: string[];
 }
 
 export type PTBModuleData = {
   _nameModules_: string[]; // module names
-  modules: Record<string, SuiMoveNormalizedModuleWithNames>;
+  modules: Record<string, IotaMoveNormalizedModuleWithNames>;
 };
 
 export interface PTBMoveCall {

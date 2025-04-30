@@ -1,7 +1,7 @@
 {
   "name": "@zktx.io/ptb-builder",
   "version": "0.1.14",
-  "description": "Sui programmable transaction blocks builder",
+  "description": "Iota programmable transaction blocks builder",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -13,7 +13,7 @@
     "format": "npm run format --prefix ../.."
   },
   "keywords": [
-    "sui",
+    "iota",
     "transaction",
     "ptb",
     "programmable transaction blocks"
@@ -51,7 +51,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@mysten/sui": "^1.18.0",
+    "@mysten/iota": "^1.18.0",
     "@xyflow/react": "^12.3.6",
     "elkjs": "^0.9.3",
     "prismjs": "^1.29.0",
